@@ -1,4 +1,5 @@
 using Application;
+using Application.Components.Order.Queries.GetAll;
 using Application.Components.Order.Queries.GetById;
 using Application.Components.Order.Repositories;
 using FluentValidation;
@@ -21,6 +22,8 @@ service.AddSingleton<DocumentClient>();
 service.AddSingleton<IOrderRepository, OrderRepository>();
 service.AddSingleton<IValidator<GetByIdRequest>, GetByIdValidation>();
 service.AddSingleton<IQueryHandler<GetByIdRequest, GetByIdResponse>, GetByIdHandler>();
+service.AddSingleton<IQueryHandler<GetAllRequest, GetAllResponse>, GetAllHandler>();
+// ToDo - register decorators only with their own validators
 service.Decorate(typeof(IQueryHandler<,>), typeof(ValidationAspect<,>));
 
 
