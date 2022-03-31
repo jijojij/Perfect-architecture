@@ -1,3 +1,5 @@
+using Application.Abstracts;
+
 namespace Application.Components.Order.Queries.GetById;
 
 public class GetByIdResponse : IResponse
