@@ -1,4 +1,5 @@
 using Application;
+using Application.Abstracts;
 using FluentValidation;
 
 namespace TestAtch.Aspects;

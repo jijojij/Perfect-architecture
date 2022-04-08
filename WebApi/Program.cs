@@ -1,4 +1,5 @@
 using Application;
+using Application.Abstracts;
 using Application.Components.Order.Queries.GetAll;
 using Application.Components.Order.Queries.GetById;
 using Application.Components.Order.Repositories;
@@ -19,10 +20,20 @@ builder.Services.AddSwaggerGen();
 
 var service = builder.Services;
 service.AddSingleton<DocumentClient>();
+service.AddMemoryCache();
+
+// repositories
 service.AddSingleton<IOrderRepository, OrderRepository>();
+
+// query handlers
+// get by id
 service.AddSingleton<IValidator<GetByIdRequest>, GetByIdValidation>();
 service.AddSingleton<IQueryHandler<GetByIdRequest, GetByIdResponse>, GetByIdHandler>();
+// get all
 service.AddSingleton<IQueryHandler<GetAllRequest, GetAllResponse>, GetAllHandler>();
+
+// aspects
+service.Decorate(typeof(IQueryHandler<,>), typeof(CacheAspect<,>));
 // ToDo - register decorators only with their own validators
 service.Decorate(typeof(IQueryHandler<,>), typeof(ValidationAspect<,>));
 

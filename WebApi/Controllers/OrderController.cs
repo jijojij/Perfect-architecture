@@ -1,4 +1,4 @@
-using Application;
+using Application.Abstracts;
 using Application.Components.Order.Queries.GetAll;
 using Application.Components.Order.Queries.GetById;
 using Contracts;
